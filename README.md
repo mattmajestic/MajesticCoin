@@ -2,12 +2,14 @@
 
 Welcome to the world of blockchain smart contracts! In just one minute, you'll explore the creation of your very own cryptocurrency - MajesticCoin (MAJ)!
 
-## MajesticCoin Exchange POC
+## MajesticCoin Exchange POC 🚀
 
-A proof of concept available here: 
+A proof of concept available at the following locations:
 
-- Render: [![Render Deployment](https://render.com/badges/deploy-button.svg)](https://maj-exchange.onrender.com/)
-- Vercel: [![Vercel Deployment](https://vercel.com/button)](https://majestic-coin.vercel.app/)
+| Platform | Setup | Link |
+| -------- | ----- | ---- |
+| Render 🐳 | Docker | [Visit Site](https://maj-exchange.onrender.com/) |
+| Vercel ⚛️ | React | [Visit Site](https://majestic-coin.vercel.app/) |
 
 ## Getting Started making a Coin
 
