@@ -2,7 +2,11 @@
 
 Welcome to the world of blockchain smart contracts! In just one minute, you'll explore the creation of your very own cryptocurrency - MajesticCoin (MAJ)!
 
-## Getting Started
+## MajesticCoin Exchange POC
+
+A proof of concept available here: https://majestic-coin.vercel.app/
+
+## Getting Started making a Coin
 
 1. Install [Remix IDE](https://remix.ethereum.org/) or any other Solidity development environment.
 2. Create a new file and paste the code from `MajesticCoin.sol` in Remix IDE.
