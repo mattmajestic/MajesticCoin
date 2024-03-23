@@ -4,7 +4,10 @@ Welcome to the world of blockchain smart contracts! In just one minute, you'll e
 
 ## MajesticCoin Exchange POC
 
-A proof of concept available here: https://majestic-coin.vercel.app/
+A proof of concept available here: 
+
+- Render: [![Render Deployment](https://render.com/badges/deploy-button.svg)](https://maj-exchange.onrender.com/)
+- Vercel: [![Vercel Deployment](https://vercel.com/button)](https://majestic-coin.vercel.app/)
 
 ## Getting Started making a Coin
 
