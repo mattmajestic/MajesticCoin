@@ -1,49 +1,89 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect, useMemo } from 'react';
 import { ethers } from 'ethers';
 import contractABI from './contractABI.json';
+import './Exchange.css'; // Import the CSS file for styling
 
 const Exchange = () => {
-  const [amount, setAmount] = useState('');
-  const [transactionHash, setTransactionHash] = useState(null);
-  const [error, setError] = useState(null);
+    const [ethAmount, setEthAmount] = useState(1);
+    const [majAmount, setMajAmount] = useState('');
+    const [showModal, setShowModal] = useState(false);
+    const tokenContractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
 
-  const provider = new ethers.JsonRpcProvider(`https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_API_KEY}`);
-  const wallet = new ethers.Wallet(process.env.REACT_APP_PRIVATE_KEY, provider);
-  const exchangeContractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+    const provider = useMemo(() => new ethers.JsonRpcProvider(`https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_API_KEY}`), []);
+    const tokenContract = useMemo(() => new ethers.Contract(tokenContractAddress, contractABI, provider), [provider, tokenContractAddress]);
 
-  const exchangeMyCoinToETH = async (amountToExchange) => {
-    try {
-      const exchangeContract = new ethers.Contract(exchangeContractAddress, contractABI, wallet);
-      // Make sure 'exchangeToETH' is replaced by the actual function name you want to call
-      const tx = await exchangeContract.exchangeToETH(amountToExchange);
-      await tx.wait();
-      setTransactionHash(tx.hash);
-    } catch (err) {
-      setError(err.message);
-    }
-  };
+    useEffect(() => {
+        const getConversionRate = async () => {
+            const unitsOneEthCanBuy = await tokenContract.unitsOneEthCanBuy();
+            const majEquivalent = Number(ethAmount) * Number(unitsOneEthCanBuy.toString());
+            setMajAmount(majEquivalent.toString());
+        };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await exchangeMyCoinToETH(amount);
-  };
+        getConversionRate();
 
-  return (
-    <div>
-      <h2>Exchange Your Coin for ETH</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          placeholder="Amount to exchange"
-        />
-        <button type="submit">Exchange</button>
-      </form>
-      {transactionHash && <p>Transaction Hash: {transactionHash}</p>}
-      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-    </div>
-  );
+        const script = document.createElement('script');
+        script.src = 'https://widgets.coingecko.com/coingecko-coin-price-chart-widget.js';
+        script.async = true;
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, [ethAmount, tokenContract]);
+
+    const handleTrade = async (e) => {
+        e.preventDefault();
+        setShowModal(true);
+    };
+
+    const handleConfirmTrade = async () => {
+        alert(`Simulating trade of ${ethAmount} ETH for ${majAmount} MAJ.`);
+        setShowModal(false);
+    };
+
+    const handleCancelTrade = () => {
+        setShowModal(false);
+    };
+
+    return (
+        <div className="exchange-container">
+            <h2>MajesticCoin Exchange</h2>
+            <coingecko-coin-price-chart-widget coin-id="ethereum" currency="usd" height="300" locale="en" background-color="#f9f0f0"></coingecko-coin-price-chart-widget>
+            <form onSubmit={handleTrade} className="eth-label">
+                <label>
+                    ETH Amount:
+                    <input
+                        className="eth-input"
+                        type="number"
+                        value={ethAmount}
+                        onChange={(e) => setEthAmount(parseFloat(e.target.value))}
+                        placeholder="ETH amount"
+                    />
+                </label>
+                <div className="exchange-wrapper">
+                    <div className="coin-icon">&#x1F4B5;</div>
+                    <p className="conversion-text">Equivalent MAJ</p>
+                    <div className="coin-icon">&#x1F4B0;</div>
+                </div>
+                <p className="maj-amount">{majAmount} MAJ</p>
+                <button type="submit">Submit Trade</button>
+            </form>
+            <a href="https://github.com/mattmajestic/MajesticCoin" target="_blank" rel="noopener noreferrer">
+                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" className="github-logo" />
+            </a>
+            {showModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={handleCancelTrade}>&times;</span>
+                        <p className="trade-amount">Trade Amount: {ethAmount} ETH</p>
+                        <button className="modal-button" onClick={handleConfirmTrade}>Confirm Trade</button>
+                        <button className="modal-button cancel" onClick={handleCancelTrade}>Cancel</button>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
 };
 
 export default Exchange;

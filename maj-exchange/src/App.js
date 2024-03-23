@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import Exchange from './Exchange'; // Make sure this matches the file name of your Exchange component
 
 function App() {
