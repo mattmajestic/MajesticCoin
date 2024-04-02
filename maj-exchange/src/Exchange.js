@@ -9,6 +9,9 @@ const Exchange = () => {
     const [majAmount, setMajAmount] = useState('');
     const [showModal, setShowModal] = useState(false);
     const tokenContractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+    const [showLegalModal, setShowLegalModal] = useState(false);
+
+    
 
     const provider = useMemo(() => new ethers.JsonRpcProvider(`https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_API_KEY}`), []);
     const tokenContract = useMemo(() => new ethers.Contract(tokenContractAddress, contractABI, provider), [provider, tokenContractAddress]);
@@ -38,9 +41,10 @@ const Exchange = () => {
     };
 
     const handleConfirmTrade = async () => {
-        alert(`Simulating trade of ${ethAmount} ETH for ${majAmount} MAJ.`);
-        setShowModal(false);
-    };
+        // Instead of alert, show the legal modal
+        setShowModal(false); // Close the trade confirmation modal
+        setShowLegalModal(true); // Show the legal modal
+    };    
 
     const handleCancelTrade = () => {
         setShowModal(false);
@@ -82,6 +86,15 @@ const Exchange = () => {
                     </div>
                 </div>
             )}
+            {showLegalModal && (
+    <div className="modal">
+        <div className="modal-content">
+            <span className="close" onClick={() => setShowLegalModal(false)}>&times;</span>
+            <p>Currently looking at the legal implications of enabling trading. Check back soon...</p>
+            <button className="modal-button" onClick={() => setShowLegalModal(false)}>Ok</button>
+        </div>
+    </div>
+)}
         </div>
     );
 };
