@@ -92,28 +92,29 @@ button:hover {
 .toggle-buttons {
   margin-bottom: 20px;
   display: flex;
-  justify-content: center; /* Center the buttons horizontally */
+  justify-content: center;
 }
 
 .toggle-buttons button {
   margin: 0 10px;
-  padding: 10px 20px; /* Increase padding for a larger button */
+  padding: 10px;
   font-size: 16px;
-  background-color: #007bff; /* A nice blue shade */
-  color: white; /* White text color */
-  border: none; /* Remove default border */
-  border-radius: 5px; /* Rounded corners */
-  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
-  transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition for transform and background-color */
-  outline: none; /* Remove outline to avoid the default focus outline */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .toggle-buttons button:hover {
-  background-color: #0056b3; /* Darker shade of blue on hover */
-  transform: rotate(-5deg) scale(1.05); /* Rotate slightly and scale up for a fun effect */
+  background-color: #45a049;
 }
 
-.toggle-buttons button:focus {
-  box-shadow: 0 0 0 2px rgba(0,123,255,0.5); /* Add a glow effect on focus for accessibility */
+.cancel {
+  background-color: #f44336;
 }
 
+.cancel:hover {
+  background-color: #d32f2f;
+}

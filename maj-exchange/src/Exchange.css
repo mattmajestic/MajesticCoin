@@ -73,19 +73,19 @@
 }
 
 .coin-icon {
-    font-size: 24px;
-    margin-right: 10px;
-}
-
-.conversion-text {
-    font-size: 24px; /* Larger font size */
-    margin-right: 10px;
-}
-
+    font-size: 36px;
+    margin: 0 5px; /* Adjusts margin for inline display */
+  }
+  
+  .conversion-text {
+    font-size: 28px; /* Bigger font size for conversion text */
+    margin: 0 5px; /* Adjusts margin for inline display */
+  }
+  
 .maj-amount {
-    font-size: 36px; /* Larger font size for MAJ amount */
+    font-size: 24px; /* Larger font size for MAJ amount */
     font-weight: bold;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 .eth-label {
     font-size: 24px; /* Adjust the font size as needed */
