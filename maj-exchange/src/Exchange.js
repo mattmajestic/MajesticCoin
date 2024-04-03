@@ -71,9 +71,8 @@ const Exchange = () => {
                 <div className="coin-icon">&#x1F4B0;</div>
             </div>
             <p className="maj-amount">{majAmount} MAJ</p>
+            <button type="submit">Submit Trade</button>
             </form>
-
-                <button type="submit">Submit Trade</button>
             <a href="https://github.com/mattmajestic/MajesticCoin" target="_blank" rel="noopener noreferrer">
                 <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" className="github-logo" />
             </a>
