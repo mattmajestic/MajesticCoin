@@ -3,6 +3,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { ethers } from 'ethers';
 import contractABI from './contractABI.json';
 import './Exchange.css'; // Import the CSS file for styling
+import MetaMaskButton from './MetaMaskButton';
 
 const Exchange = () => {
     const [ethAmount, setEthAmount] = useState(1);
@@ -55,23 +56,24 @@ const Exchange = () => {
             <h2>MajesticCoin Exchange</h2>
             <coingecko-coin-price-chart-widget coin-id="ethereum" currency="usd" height="200" locale="en" background-color="#f9f0f0"></coingecko-coin-price-chart-widget>
             <form onSubmit={handleTrade} className="eth-label">
-            <label>
-                ETH Amount:
-                <input
-                className="eth-input"
-                type="number"
-                value={ethAmount}
-                onChange={(e) => setEthAmount(parseFloat(e.target.value))}
-                placeholder="ETH amount"
-                />
-            </label>
-            <div className="exchange-wrapper">
-                <div className="coin-icon">&#x1F4B5;</div>
-                <p className="conversion-text">Equivalent MAJ</p>
-                <div className="coin-icon">&#x1F4B0;</div>
-            </div>
-            <p className="maj-amount">{majAmount} MAJ</p>
-            <button type="submit">Submit Trade</button>
+                <label>
+                    ETH Amount:
+                    <input
+                        className="eth-input"
+                        type="number"
+                        value={ethAmount}
+                        onChange={(e) => setEthAmount(parseFloat(e.target.value))}
+                        placeholder="ETH amount"
+                    />
+                </label>
+                <MetaMaskButton />
+                <div className="exchange-wrapper">
+                    <div className="coin-icon">&#x1F4B5;</div>
+                    <p className="conversion-text">Equivalent MAJ</p>
+                    <div className="coin-icon">&#x1F4B0;</div>
+                </div>
+                <p className="maj-amount">{majAmount} MAJ</p>
+                <button type="submit">Submit Trade</button>
             </form>
             <a href="https://github.com/mattmajestic/MajesticCoin" target="_blank" rel="noopener noreferrer">
                 <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" className="github-logo" />
