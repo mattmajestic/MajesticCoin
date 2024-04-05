@@ -1,36 +1,43 @@
 // LiquidityPool.js
 import React, { useState } from 'react';
-import './Exchange.css';
+import { Box, Slider, SliderTrack, SliderFilledTrack, SliderThumb, Text, Heading } from "@chakra-ui/react";
 import LiquidityPoolPlot from './LiquidityPoolPlot'; // Make sure the path is correct
+import './App.css';
 
 const LiquidityPool = () => {
   const [ethContribution, setEthContribution] = useState(0);
 
   return (
-    <div className="exchange-container">
-      <h2>MAJ Token Liquidity Pool Simulation</h2>
+    <Box p={5}>
+      <Heading mb={5}>MAJ Token Liquidity Pool Simulation</Heading>
       
       {/* ETH Contribution Slider */}
-      <div>
-        <label htmlFor="ethContribution">ETH Contribution:</label>
-        <input
+      <Box>
+        <Text mb={2}>ETH Contribution:</Text>
+        <Slider
           id="ethContribution"
-          type="range"
-          min="0"
-          max="100"
+          min={0}
+          max={100}
           value={ethContribution}
-          onChange={(e) => setEthContribution(Number(e.target.value))}
-        />
-        <span> {ethContribution} ETH</span>
-      </div>
+          onChange={(value) => setEthContribution(value)}
+        >
+          <SliderTrack>
+            <SliderFilledTrack />
+          </SliderTrack>
+          <SliderThumb boxSize={6}>
+            <Box color="tomato" />
+          </SliderThumb>
+        </Slider>
+        <Text mt={2}>{ethContribution} ETH</Text>
+      </Box>
       
-      <p>
+      <Text mt={5}>
         For contributing <strong>{ethContribution} ETH</strong>, you will receive <strong>{ethContribution * 10} MAJ</strong> tokens.
-      </p>
+      </Text>
 
       {/* Include the LiquidityPoolPlot component */}
       <LiquidityPoolPlot/>
-    </div>
+    </Box>
   );
 };
 
